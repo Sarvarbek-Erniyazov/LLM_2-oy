@@ -1,0 +1,14 @@
+# Course Lesson 7 deliverable. Derived from configs/model/ladder_v0.yaml (rung S2) and
+# configs/train/joint_v0.yaml; every value must equal those sources -- see
+# tests/model/test_course_design.py. Not a run config; nothing trains from this file.
+#
+# The backbone described is the ADR-0021 gate run's (tel_only, S2, seed 1, 50,003,968 tokens).
+
+vocab_size: 33952   # identifiers the embedding covers: ADR-0003 v2 fixed-capacity joint layout (src/faultline/tokenizers/layout.py)
+block_size: 2048    # context in tokens: configs/train/joint_v0.yaml context_tokens (144 x 13 = 1,872 is the M1 ladder / probe window)
+n_embd: 192         # model width: configs/model/ladder_v0.yaml rung S2 d_model
+n_layer: 8          # model depth: configs/model/ladder_v0.yaml rung S2 n_layer
+n_head: 8           # attention heads (192 / 8 = 24 per head): configs/model/ladder_v0.yaml rung S2 n_head
+dropout: 0.0        # configs/model/ladder_v0.yaml dropout
+ffn_mult: 4         # read from src/faultline/model/transformer.py (Linear(d_model, 4 * d_model)), not a config key
+tie_weights: true   # read from src/faultline/model/transformer.py (output head tied to the token embedding), not a config key
